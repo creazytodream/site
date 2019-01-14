@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan("com.plant.site.dao")
-@ComponentScan(basePackages = "com.plant.site")
+@MapperScan(value = "com.plant.site.dao")
+@ComponentScan(basePackages = "com.plant.site.*")
 public class SiteApplication {
 
     public static void main(String[] args) {

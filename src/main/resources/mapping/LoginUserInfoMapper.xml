@@ -152,90 +152,9 @@
       </if>
     </trim>
   </insert>
-  <resultMap id="BaseResultMap" type="com.plant.site.model.LoginUserInfo">
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-  </resultMap>
-  <insert id="insert" parameterType="com.plant.site.model.LoginUserInfo">
-    insert into t_user (id, username, password
-      )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.plant.site.model.LoginUserInfo">
-    insert into t_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="username != null">
-        username,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <resultMap id="BaseResultMap" type="com.plant.site.model.LoginUserInfo">
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="u_name" jdbcType="VARCHAR" property="uName" />
-    <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
-    <result column="u_sex" jdbcType="VARCHAR" property="uSex" />
-    <result column="u_age" jdbcType="INTEGER" property="uAge" />
-  </resultMap>
-  <insert id="insert" parameterType="com.plant.site.model.LoginUserInfo">
-    insert into t_user (id, u_name, u_password, 
-      u_sex, u_age)
-    values (#{id,jdbcType=INTEGER}, #{uName,jdbcType=VARCHAR}, #{uPassword,jdbcType=VARCHAR}, 
-      #{uSex,jdbcType=VARCHAR}, #{uAge,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.plant.site.model.LoginUserInfo">
-    insert into t_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="uName != null">
-        u_name,
-      </if>
-      <if test="uPassword != null">
-        u_password,
-      </if>
-      <if test="uSex != null">
-        u_sex,
-      </if>
-      <if test="uAge != null">
-        u_age,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="uName != null">
-        #{uName,jdbcType=VARCHAR},
-      </if>
-      <if test="uPassword != null">
-        #{uPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="uSex != null">
-        #{uSex,jdbcType=VARCHAR},
-      </if>
-      <if test="uAge != null">
-        #{uAge,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
+
+
+
+
+
 </mapper>
