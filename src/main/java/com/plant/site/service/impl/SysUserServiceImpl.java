@@ -15,8 +15,8 @@ import java.util.List;
  * @date: 2019/1/11 10:54
  * @version:1.0
  **/
-@Service
 @Slf4j
+@Service
 public  class SysUserServiceImpl implements ISysUserService {
 
     @Autowired

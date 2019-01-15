@@ -1,23 +1,16 @@
 package com.plant.site.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class URolePermission {
     private Long rid;
 
     private Long pid;
 
-    public Long getRid() {
-        return rid;
-    }
 
-    public void setRid(Long rid) {
-        this.rid = rid;
-    }
-
-    public Long getPid() {
-        return pid;
-    }
-
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
 }
