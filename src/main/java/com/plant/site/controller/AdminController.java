@@ -21,8 +21,8 @@ import java.util.Map;
  * @date: 2019/1/14 10:42
  * @version:1.0
  **/
-@RestController
 @Slf4j
+@RestController
 @RequestMapping("admin")
 public class AdminController {
 
@@ -31,7 +31,7 @@ public class AdminController {
     private URoleDao uRoleDao;
 
     //跳转到登录表单页面
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String login() {
         return "need login";
     }

@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,16 +22,16 @@ import java.util.List;
  * @date: 2019/1/11 12:31
  * @version:1.0
  **/
+@Slf4j
 @RestController
 @RequestMapping("excel")
-@Slf4j
 public class ExcelController {
 
     @Autowired
     private ISysUserService sysUserService;
 
 
-    @RequestMapping(value = "writeExcel", method = RequestMethod.GET)
+    @GetMapping(value = "writeExcel")
     public void writeExcel(HttpServletResponse response) throws IOException {
         List<SysUser> list = sysUserService.selectAll();
         List<SysUserExcelModel> sysUserExcelModels = new ArrayList<>();
@@ -50,7 +47,7 @@ public class ExcelController {
         ExcelUtil.writeExcel(response, sysUserExcelModels, fileName, sheetName, new SysUserExcelModel());
     }
 
-    @RequestMapping(value = "writeExcelWithSheets", method = RequestMethod.GET)
+    @GetMapping(value = "writeExcelWithSheets")
     public void writeExcelWithSheets(HttpServletResponse response) throws IOException {
         List<SysUser> list = sysUserService.selectAll();
 //        List<SysUserExcelModel> sysUserExcelModels = new ArrayList<>();
@@ -87,7 +84,7 @@ public class ExcelController {
 
     }
 
-    @RequestMapping(value = "readExcel", method = RequestMethod.POST)
+    @PostMapping(value = "readExcel")
     public List<SysUserExcelModel> readExcel(@RequestParam("file") MultipartFile excel) {
         Object objects = ExcelUtil.readExcel(excel, new SysUserExcelModel());
 
