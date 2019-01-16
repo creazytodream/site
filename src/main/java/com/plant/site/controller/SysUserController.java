@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("sysUser")
 public class SysUserController {
 
+
     @Autowired
     private ISysUserService sysUserService;
 
