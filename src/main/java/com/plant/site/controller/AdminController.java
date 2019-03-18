@@ -52,7 +52,7 @@ public class AdminController {
     @GetMapping(value = "/login1")
     public String index(@RequestParam(value = "nickname") String username, @RequestParam(value = "pwd") String password) {
         UUser user=new UUser();
-
+        //from page data
         user.setPswd(password);
         user.setNickname(username);
         if (user.getNickname() != null && user.getPswd() != null) {

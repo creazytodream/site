@@ -7,6 +7,7 @@ import com.plant.site.util.ExcelUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,14 +25,13 @@ import java.util.List;
  **/
 @Slf4j
 @RestController
-@RequestMapping("excel")
+@RequestMapping("/excel")
 public class ExcelController {
 
     @Autowired
     private ISysUserService sysUserService;
 
-
-    @GetMapping(value = "writeExcel")
+    @RequestMapping(value = "/writeExcel")
     public void writeExcel(HttpServletResponse response) throws IOException {
         List<SysUser> list = sysUserService.selectAll();
         List<SysUserExcelModel> sysUserExcelModels = new ArrayList<>();
@@ -80,7 +80,7 @@ public class ExcelController {
                 .write(sysUserExcelModels, sheetName3, new SysUserExcelModel())
                 .finish();
         Long endTime = System.currentTimeMillis();
-        log.info("导出数据共{}条,用时间{}秒", sysUserExcelModels.size(), (endTime - startTime)/1000);
+        log.info("导出数据共{}条,用时间{}秒", sysUserExcelModels.size(), (endTime - startTime) / 1000);
 
     }
 
