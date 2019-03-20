@@ -1,6 +1,5 @@
 package com.plant.site.controller;
 
-import com.plant.site.aspect.NeedManagerPower;
 import com.plant.site.model.SysUser;
 import com.plant.site.service.ISysUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,6 @@ public class SysUserController {
     private ISysUserService sysUserService;
 
     @GetMapping("login")
-    @NeedManagerPower
     public SysUser login(HttpSession session, @RequestParam("userName") String userName, @RequestParam("password") String password) {
 //        session.setAttribute("userName", userName);
         SysUser sysUser = new SysUser();
@@ -41,9 +39,8 @@ public class SysUserController {
     @GetMapping("getById")
     public SysUser getById(Integer id) {
 
-        return sysUserService.getById(id);
-
-
+        SysUser byId = sysUserService.getById(id);
+        return byId;
     }
 
     @PostMapping("/add")

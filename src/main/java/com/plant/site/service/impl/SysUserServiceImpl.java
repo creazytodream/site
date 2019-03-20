@@ -5,6 +5,9 @@ import com.plant.site.model.SysUser;
 import com.plant.site.service.ISysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.List;
  * @version:1.0
  **/
 @Slf4j
+@CacheConfig(cacheNames = "Users")
 @Service
 public  class SysUserServiceImpl implements ISysUserService {
 
@@ -24,11 +28,13 @@ public  class SysUserServiceImpl implements ISysUserService {
 
 
     @Override
+    @Cacheable
     public int insert(SysUser record) {
         return sysUserMapper.insert(record);
     }
 
     @Override
+    @Cacheable(key = "#SysUser.id",value = "#id+SysUser")
     public SysUser getById(Integer id) {
 
         return sysUserMapper.getById(id);
@@ -36,6 +42,7 @@ public  class SysUserServiceImpl implements ISysUserService {
 
 
     @Override
+    @CachePut
     public int updateSysUserByUserId(Integer userId) {
 
         return  sysUserMapper.updateSysUserByUserId(userId);
@@ -43,6 +50,7 @@ public  class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
+    @Cacheable
     public List<SysUser> selectAll() {
         return sysUserMapper.selectAll();
     }

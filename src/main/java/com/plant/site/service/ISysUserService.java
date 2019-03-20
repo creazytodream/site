@@ -1,6 +1,7 @@
 package com.plant.site.service;
 
 import com.plant.site.model.SysUser;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,5 +23,6 @@ public interface ISysUserService {
     int updateSysUserByUserId(@Param("userId") Integer userId);
 
     List<SysUser> selectAll();
+
 
 }
