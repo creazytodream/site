@@ -24,5 +24,6 @@ public interface ISysUserService {
 
     List<SysUser> selectAll();
 
+    int deleteSysUserById(Integer id);
 
 }

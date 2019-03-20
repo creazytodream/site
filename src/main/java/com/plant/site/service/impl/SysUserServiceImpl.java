@@ -6,6 +6,7 @@ import com.plant.site.service.ISysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,9 @@ import java.util.List;
  * @version:1.0
  **/
 @Slf4j
-@CacheConfig(cacheNames = "Users")
+@CacheConfig(cacheNames = {"SysUser"})
 @Service
-public  class SysUserServiceImpl implements ISysUserService {
+public class SysUserServiceImpl implements ISysUserService {
 
     @Autowired
     SysUserMapper sysUserMapper;
@@ -34,18 +35,22 @@ public  class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    @Cacheable(key = "#SysUser.id",value = "#id+SysUser")
+    @Cacheable(key = "'SysUser_'+#id", value = "SysUser")
     public SysUser getById(Integer id) {
 
         return sysUserMapper.getById(id);
     }
 
 
+    /**
+     * @return
+     * @desctiption CachePut 方法不会每次去检查在缓存中是否存在数据，每次都会去执行该方法，把结果集放在缓存中
+     */
     @Override
     @CachePut
     public int updateSysUserByUserId(Integer userId) {
 
-        return  sysUserMapper.updateSysUserByUserId(userId);
+        return sysUserMapper.updateSysUserByUserId(userId);
 
     }
 
@@ -53,6 +58,16 @@ public  class SysUserServiceImpl implements ISysUserService {
     @Cacheable
     public List<SysUser> selectAll() {
         return sysUserMapper.selectAll();
+    }
+
+    /**
+     * @return
+     * @desctiption CacheEvict 清除缓存
+     */
+    @Override
+    @CacheEvict
+    public int deleteSysUserById(Integer id) {
+        return sysUserMapper.deleteSysUserById(id);
     }
 
 

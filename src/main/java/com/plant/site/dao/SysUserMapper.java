@@ -15,5 +15,5 @@ public interface SysUserMapper {
 
     int updateSysUserByUserId(@Param("userId") Integer id);
 
-
+    int deleteSysUserById(@Param("id") Integer id);
 }

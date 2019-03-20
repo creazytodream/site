@@ -36,7 +36,7 @@ public class SysUserController {
     }
 
 
-    @GetMapping("getById")
+    @GetMapping("/getById")
     public SysUser getById(Integer id) {
 
         SysUser byId = sysUserService.getById(id);
@@ -46,6 +46,11 @@ public class SysUserController {
     @PostMapping("/add")
     public int addUser(SysUser user) {
         return sysUserService.insert(user);
+    }
+
+    @GetMapping("/deleteSysUserById")
+    public int deleteSysUserById(Integer id) {
+        return sysUserService.deleteSysUserById(id);
     }
 
 }
