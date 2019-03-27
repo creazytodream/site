@@ -5,6 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @description: TODO
  * @author: yumingbin@zto.cn
@@ -18,6 +21,7 @@ public class CacheTest {
 
     @Test
     public void get() {
-
+        Map map=new HashMap();
+        System.out.println(map);
     }
 }

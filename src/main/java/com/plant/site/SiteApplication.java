@@ -5,10 +5,12 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @MapperScan(value = "com.plant.site.dao")
 @EnableCaching
+@EnableTransactionManagement
 public class SiteApplication {
 
     public static void main(String[] args) {

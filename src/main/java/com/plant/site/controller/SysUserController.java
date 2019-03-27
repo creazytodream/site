@@ -2,6 +2,9 @@ package com.plant.site.controller;
 
 import com.plant.site.model.SysUser;
 import com.plant.site.service.ISysUserService;
+import com.plant.site.util.ResponseResult;
+import com.plant.site.util.ResultEnum;
+import com.plant.site.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +40,9 @@ public class SysUserController {
 
 
     @GetMapping("/getById")
-    public SysUser getById(Integer id) {
-
+    public ResponseResult<SysUser> getById(Integer id) {
         SysUser byId = sysUserService.getById(id);
-        return byId;
+        return ResultUtil.success(byId);
     }
 
     @PostMapping("/add")
@@ -51,6 +53,13 @@ public class SysUserController {
     @GetMapping("/deleteSysUserById")
     public int deleteSysUserById(Integer id) {
         return sysUserService.deleteSysUserById(id);
+    }
+
+    @PostMapping("/update")
+    public  void  update(){
+
+        int i = sysUserService.updateSysUserByUserId(2);
+
     }
 
 }

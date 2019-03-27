@@ -13,7 +13,7 @@ public interface SysUserMapper {
 
     List<SysUser> selectAll();
 
-    int updateSysUserByUserId(@Param("userId") Integer id);
+    int updateSysUserByUserId(SysUser sysUser);
 
     int deleteSysUserById(@Param("id") Integer id);
 }

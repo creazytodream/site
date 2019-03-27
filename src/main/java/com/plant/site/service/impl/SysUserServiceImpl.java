@@ -7,9 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -47,10 +47,15 @@ public class SysUserServiceImpl implements ISysUserService {
      * @desctiption CachePut 方法不会每次去检查在缓存中是否存在数据，每次都会去执行该方法，把结果集放在缓存中
      */
     @Override
-    @CachePut
+//    @CachePut
+    @Transactional
     public int updateSysUserByUserId(Integer userId) {
-
-        return sysUserMapper.updateSysUserByUserId(userId);
+        SysUser sysUser1=SysUser.builder().id(1).userName("1111").userId(1).password("password").build();
+        SysUser sysUser2=SysUser.builder().id(2).userName("2222").userId(2).build();
+        int i = sysUserMapper.updateSysUserByUserId(sysUser1);
+        int o = sysUserMapper.updateSysUserByUserId(sysUser2);
+        log.info("i {},o { }", i, o);
+        return i;
 
     }
 

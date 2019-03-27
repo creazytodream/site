@@ -51,7 +51,7 @@
             <!--</if>-->
         <!--</trim>-->
     <!--</insert>-->
-    <update id="updateSysUserByUserId">
+    <update id="updateSysUserByUserId" >
         update sys_user
         set user_name = #{userName},
             password  = #{password}
