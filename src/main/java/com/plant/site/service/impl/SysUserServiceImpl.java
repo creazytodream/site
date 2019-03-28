@@ -3,13 +3,13 @@ package com.plant.site.service.impl;
 import com.plant.site.dao.SysUserMapper;
 import com.plant.site.model.SysUser;
 import com.plant.site.service.ISysUserService;
+import com.plant.site.util.ThreadPool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +27,8 @@ public class SysUserServiceImpl implements ISysUserService {
     @Autowired
     SysUserMapper sysUserMapper;
 
+    @Autowired
+    private ThreadPool threadPool;
 
     @Override
     @Cacheable
@@ -48,14 +50,19 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
 //    @CachePut
-    @Transactional
+//    @Transactional
     public int updateSysUserByUserId(Integer userId) {
-        SysUser sysUser1=SysUser.builder().id(1).userName("1111").userId(1).password("password").build();
-        SysUser sysUser2=SysUser.builder().id(2).userName("2222").userId(2).build();
-        int i = sysUserMapper.updateSysUserByUserId(sysUser1);
+        SysUser sysUser1 = SysUser.builder().id(null).userName("1111").userId(1).password("1password").build();
+        SysUser sysUser2 = SysUser.builder().id(2).userName("2222").userId(2).password("2password").build();
+//        int i = sysUserMapper.updateSysUserByUserId(sysUser1);
         int o = sysUserMapper.updateSysUserByUserId(sysUser2);
-        log.info("i {},o { }", i, o);
-        return i;
+//        log.info("i {},o { }", i, o);
+        threadPool.execute(() -> {
+            sysUserMapper.insert(sysUser1);
+            sysUserMapper.updateSysUserByUserId(sysUser2);
+
+        });
+        return 0;
 
     }
 
