@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -19,13 +20,16 @@ public class ThreadPool {
     private ThreadPoolExecutor executor;
 
     @PostConstruct
-    public  void  init(){
+    public void init() {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
 
-        executor=new ThreadPoolExecutor((availableProcessors+1)/2,availableProcessors+1,600, TimeUnit.SECONDS,new LinkedBlockingDeque<>());
+        executor = new ThreadPoolExecutor((availableProcessors + 1) / 2, availableProcessors + 1, 60, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
     }
 
     public void execute(Runnable runnable) {
         executor.execute(runnable);
     }
+
+
+
 }

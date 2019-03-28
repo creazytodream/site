@@ -11,6 +11,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
 import java.util.List;
 
 /**
@@ -55,13 +57,12 @@ public class SysUserServiceImpl implements ISysUserService {
         SysUser sysUser1 = SysUser.builder().id(null).userName("1111").userId(1).password("1password").build();
         SysUser sysUser2 = SysUser.builder().id(2).userName("2222").userId(2).password("2password").build();
 //        int i = sysUserMapper.updateSysUserByUserId(sysUser1);
-        int o = sysUserMapper.updateSysUserByUserId(sysUser2);
-//        log.info("i {},o { }", i, o);
         threadPool.execute(() -> {
             sysUserMapper.insert(sysUser1);
             sysUserMapper.updateSysUserByUserId(sysUser2);
-
         });
+        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+        log.info(" 线程总数为 ={}", threadMXBean.getThreadCount());
         return 0;
 
     }

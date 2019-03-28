@@ -49,5 +49,5 @@ mybatis:
 logging:
   level:
     com.plant.site.dao: debug # 改成你的mapper文件所在包路径
-    com.plant.site: info
+    com.plant.site: debug
 
